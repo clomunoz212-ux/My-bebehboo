@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For My Favorite Person ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(-45deg, #ff4d6d, #ff8fa3, #ffc2d1, #fff0f3);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 { font-size: 40px; }
+
+        .heart {
+            font-size: 100px;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .message {
+            max-width: 700px;
+            margin-top: 20px;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 2s ease;
+            white-space: pre-line;
+        }
+
+        .show { opacity: 1; }
+
+        button {
+            margin-top: 20px;
+            background: white;
+            color: #ff4d6d;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #ffccd5; }
+
+        /* Floating hearts */
+        .floating-heart {
+            position: absolute;
+            pointer-events: none;
+            font-size: 20px;
+            animation: floatUp linear forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-50vh) scale(1.2); opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(0.8); opacity: 0; }
+        }
+
+        /* Final poem line styling */
+        .final-line {
+            font-size: 24px;
+            font-style: italic;
+            color: #ffebee; /* soft pink */
+            margin-top: 15px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Happy Valentine's Day ❤️</h1>
+
+<div class="heart" onclick="showMessage()">❤️</div>
+
+<div id="msg" class="message">
+You make every ordinary moment feel extraordinary.
+I don’t just love you — I choose you. Every day.
+Sixteen months with you has been the easiest “yes” of my life.
+<br><br>
+<button onclick="revealPoem()">Open Your Letter 💌</button>
+</div>
+
+<div id="poem" class="message"></div>
+
+<script>
+function showMessage() {
+    document.getElementById("msg").classList.add("show");
+    createClickHearts();
+}
+
+function revealPoem() {
+    const poemText = `
+Sixteen months have flown so fast,
+Yet every moment feels like it will last.
+Through every laugh and every tear,
+You’ve been my safest place, my home, my dear.
+
+I remember the first time you looked at me,
+Like somehow you already knew we’d be.
+Since then it’s been the simplest truth —
+Loving you feels like my forever proof.
+
+You are the calm inside my storm,
+The quiet warmth that keeps me warm.
+In crowded rooms my eyes find you,
+Like gravity pulls me where love is true.
+
+It’s in the way your hand fits mine,
+Like it was shaped by some design.
+In the late night talks we never end,
+In every moment we choose to bend.
+
+You’ve seen my fears, my softer side,
+The parts of me I used to hide.
+And still you stayed, and still you care —
+There’s nothing braver than love laid bare.
+
+With you, time doesn’t slip away,
+It settles gently and wants to stay.
+Ordinary days feel rare and bright,
+Just sitting with you feels exactly right.
+
+No matter where this life may bend,
+You are my lover and my best friend.
+And if I had to start again brand new,
+I would still find my way back to you.
+
+So here’s to sixteen months — and more,
+To every memory still in store.
+If love is choosing, then I choose
+A lifetime of me and you.
+
+<span class="final-line">Always and forever, my love is true.</span>
+    `;
+
+    const poemDiv = document.getElementById("poem");
+    poemDiv.innerHTML = poemText; // use innerHTML for <span>
+    poemDiv.classList.add("show");
+}
+
+// Continuous floating hearts
+function spawnBackgroundHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("floating-heart");
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 5000);
+    }, 500); // Spawn every 0.5s
+}
+
+// Extra hearts on click
+function createClickHearts() {
+    for (let i = 0; i < 15; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("floating-heart");
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 4000);
+    }
+}
+
+// Start floating hearts immediately
+spawnBackgroundHearts();
+</script>
+
+</body>
+</html>
